@@ -2,7 +2,20 @@
   
 <h1>Home</h1>
 
-<p> <%= statement %></p>
-  
+
+
+<div class="box" >
+
+<% newBlogPost.forEach(function(post) {  %>
+  <h1><%= post.title  %></h1>
+  <p><%= post.content %></p>
+<%  })  %>
+
+
+
+
+
+</div>
+
 
 <%- include("partials/footer") %>
