@@ -22,7 +22,10 @@ app.use(express.static("public"));
 
 app.get("/", (request, response) => {
 
-  response.render("home", {newBlogPost: blogPost})
+  response.render("home", {
+    newBlogPost: blogPost, 
+    startingContent: homeStartingContent
+  })
 })
 
 
@@ -65,7 +68,7 @@ app.post("/compose" , (req, res) => {
 })
 
 
-app.get("/posts/:postName", (req, res) => {
+app.get("/post/:postName", (req, res) => {
   const requestedTitle = _.lowerCase(req.params.postName);
 
   blogPost.forEach(function(post){
@@ -73,10 +76,14 @@ app.get("/posts/:postName", (req, res) => {
     const storedTitle = _.lowerCase(post.title)
 
       if(storedTitle === requestedTitle ) {
-      console.log("Match found!");
-    } else {
-      console.log("Not a Match")
-    }
+        
+        res.render("post", {
+          title: post.title,
+          content: post.content
+        });
+
+
+    } 
   });
  });
 
